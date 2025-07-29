@@ -89,7 +89,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
               </div>
               <div>
                 <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  QwiXAccent
+                  AccentAssist
                 </h1>
                 <p className="text-lg sm:text-xl text-gray-600 font-medium">AI Pronunciation Analyzer</p>
               </div>
@@ -143,7 +143,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
-              Why Choose QwiXAccent?
+              Why Choose AccentAssist?
             </h3>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Advanced AI technology meets intuitive design for the ultimate pronunciation learning experience.
@@ -201,7 +201,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Zap className="w-6 sm:w-8 h-6 sm:h-8 text-blue-600" />
                 <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  QwiXAccent
+                  AccentAssist
                 </h2>
               </div>
               <p className="text-sm sm:text-base text-gray-600">
