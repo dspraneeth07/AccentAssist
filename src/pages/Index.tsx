@@ -1,8 +1,8 @@
 
-import { VoiceRecorder } from "@/components/VoiceRecorder";
-import { FeedbackDisplay } from "@/components/FeedbackDisplay";
-import { LearningSection } from "@/components/LearningSection";
-import { PronunciationChart } from "@/components/PronunciationChart";
+import VoiceRecorder from "@/components/VoiceRecorder";
+import FeedbackDisplay from "@/components/FeedbackDisplay";
+import LearningSection from "@/components/LearningSection";
+import PronunciationChart from "@/components/PronunciationChart";
 import { Button } from "@/components/ui/button";
 import { LogOut, User } from "lucide-react";
 
