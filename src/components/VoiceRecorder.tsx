@@ -331,54 +331,54 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
   };
 
   return (
-    <div className="text-center space-y-8">
+    <div className="text-center space-y-6 sm:space-y-8 text-white px-4 sm:px-6">
       <div>
-        <h2 className="text-3xl font-bold text-foreground mb-3 font-poppins">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-3 font-poppins">
           Speak & Analyze Your Pronunciation
         </h2>
-        <p className="text-muted-foreground text-lg font-medium font-poppins">
-          Press record, speak clearly, then stop to get instant feedback on your American English accent
+        <p className="text-white/90 text-base sm:text-lg font-medium font-poppins">
+          Press record, speak clearly, then stop to get instant feedback
         </p>
       </div>
       
-      {/* Recording Controls with bigger mic */}
-      <div className="flex flex-col items-center space-y-6">
-        <div className="flex items-center justify-center space-x-6">
-          {/* Start Recording Button - Much Bigger */}
+      {/* Recording Controls - Mobile Responsive */}
+      <div className="flex flex-col items-center space-y-4 sm:space-y-6">
+        <div className="flex items-center justify-center">
+          {/* Start Recording Button - Responsive Size */}
           {!isRecording && (
             <Button
               size="lg"
               onClick={startRecording}
               disabled={isAnalyzing || !canRecord}
-              className={`w-40 h-40 rounded-full text-white transition-all duration-300 transform hover:scale-105 shadow-2xl ${
+              className={`w-32 h-32 sm:w-40 sm:h-40 rounded-full text-white transition-all duration-300 transform hover:scale-105 shadow-2xl ${
                 !canRecord 
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-blue-500/50'
+                  : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm border-2 border-white/50'
               }`}
             >
-              <div className="flex flex-col items-center space-y-3">
-                <Mic className="w-16 h-16" />
-                <span className="text-lg font-bold font-poppins">START</span>
+              <div className="flex flex-col items-center space-y-2 sm:space-y-3">
+                <Mic className="w-12 h-12 sm:w-16 sm:h-16" />
+                <span className="text-base sm:text-lg font-bold font-poppins">START</span>
               </div>
             </Button>
           )}
           
-          {/* Stop Recording Button - Much Bigger */}
+          {/* Stop Recording Button - Responsive Size */}
           {isRecording && (
             <Button
               size="lg"
               onClick={stopRecording}
-              className="w-40 h-40 rounded-full text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-500/50 animate-pulse"
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full text-white bg-red-500/80 hover:bg-red-600/80 backdrop-blur-sm border-2 border-red-300/50 transition-all duration-300 transform hover:scale-105 shadow-2xl animate-pulse"
             >
-              <div className="flex flex-col items-center space-y-3">
-                <Square className="w-16 h-16" />
-                <span className="text-lg font-bold font-poppins">STOP</span>
+              <div className="flex flex-col items-center space-y-2 sm:space-y-3">
+                <Square className="w-12 h-12 sm:w-16 sm:h-16" />
+                <span className="text-base sm:text-lg font-bold font-poppins">STOP</span>
               </div>
             </Button>
           )}
         </div>
         
-        <div className="text-lg font-semibold text-muted-foreground font-poppins">
+        <div className="text-base sm:text-lg font-semibold text-white/90 font-poppins text-center">
           {isRecording 
             ? `🔴 Recording: ${formatTime(recordingTime)} - Click STOP when done`
             : isAnalyzing 
@@ -390,22 +390,24 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
         </div>
       </div>
       
-      {/* Waveform Display */}
-      <WaveformDisplay 
-        data={waveformData} 
-        isRecording={isRecording}
-        className="max-w-lg mx-auto"
-      />
+      {/* Waveform Display - Mobile Responsive */}
+      <div className="w-full max-w-xs sm:max-w-lg mx-auto">
+        <WaveformDisplay 
+          data={waveformData} 
+          isRecording={isRecording}
+          className="w-full"
+        />
+      </div>
       
-      {/* Current Transcription */}
+      {/* Current Transcription - Mobile Responsive */}
       {transcription && (
-        <div className="space-y-4 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl">
-          <h3 className="text-xl font-bold text-foreground font-poppins">What You Said</h3>
-          <p className="text-lg italic text-muted-foreground font-poppins">"{transcription}"</p>
+        <div className="space-y-3 sm:space-y-4 p-4 sm:p-6 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30">
+          <h3 className="text-lg sm:text-xl font-bold font-poppins">What You Said</h3>
+          <p className="text-base sm:text-lg italic font-poppins break-words">"{transcription}"</p>
           <Button
             onClick={() => playCorrection()}
             disabled={isPlayingCorrection}
-            className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 font-poppins"
+            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/50 font-poppins text-sm sm:text-base"
           >
             {isPlayingCorrection ? (
               <>
@@ -422,11 +424,11 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
         </div>
       )}
       
-      {/* Audio Playback */}
+      {/* Audio Playback - Mobile Responsive */}
       {audioUrl && !isAnalyzing && (
-        <div className="space-y-4 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl">
-          <h3 className="text-xl font-bold text-foreground font-poppins">Your Recording</h3>
-          <audio controls className="mx-auto rounded-lg shadow-lg">
+        <div className="space-y-3 sm:space-y-4 p-4 sm:p-6 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30">
+          <h3 className="text-lg sm:text-xl font-bold font-poppins">Your Recording</h3>
+          <audio controls className="mx-auto rounded-lg shadow-lg w-full max-w-sm">
             <source src={audioUrl} type="audio/webm" />
             Your browser does not support audio playback.
           </audio>
@@ -434,7 +436,7 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
             <Button 
               onClick={() => analyzeAudio()}
               disabled={isAnalyzing}
-              className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 font-poppins"
+              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/50 font-poppins text-sm sm:text-base"
             >
               {isAnalyzing ? (
                 <>
@@ -449,14 +451,14 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
         </div>
       )}
 
-      {/* Analysis Status */}
+      {/* Analysis Status - Mobile Responsive */}
       {isAnalyzing && (
-        <div className="space-y-4 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl">
+        <div className="space-y-3 sm:space-y-4 p-4 sm:p-6 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30">
           <div className="flex items-center justify-center space-x-2">
-            <Loader2 className="w-6 h-6 animate-spin text-orange-600" />
-            <h3 className="text-xl font-bold text-foreground font-poppins">Processing with Gemini AI</h3>
+            <Loader2 className="w-5 sm:w-6 h-5 sm:h-6 animate-spin" />
+            <h3 className="text-lg sm:text-xl font-bold font-poppins">Processing with Gemini AI</h3>
           </div>
-          <p className="text-muted-foreground font-poppins">
+          <p className="font-poppins text-sm sm:text-base">
             Transcribing speech and analyzing your American English pronunciation...
           </p>
         </div>

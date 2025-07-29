@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mic, TrendingUp, Globe, Zap, X } from "lucide-react";
+import { Mic, TrendingUp, Globe, Zap, X, Headphones } from "lucide-react";
 import { credentialsStore } from "@/data/credentials";
 import { useToast } from "@/hooks/use-toast";
 
@@ -80,34 +80,48 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-24">
           <div className="text-center">
             <div className="flex items-center justify-center gap-4 mb-8">
               <div className="relative">
-                <Zap className="w-16 h-16 text-blue-600" />
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+                <Zap className="w-12 sm:w-16 h-12 sm:h-16 text-blue-600" />
+                <div className="absolute -top-2 -right-2 w-4 sm:w-6 h-4 sm:h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
               </div>
               <div>
-                <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   QwiXAccent
                 </h1>
-                <p className="text-xl text-gray-600 font-medium">AI Pronunciation Analyzer</p>
+                <p className="text-lg sm:text-xl text-gray-600 font-medium">AI Pronunciation Analyzer</p>
               </div>
             </div>
             
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">
               Master Your American English Accent
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
               Transform your pronunciation with AI-powered speech analysis. 
               Get instant feedback, track your progress, and speak with confidence.
             </p>
+
+            {/* Added Master Your Pronunciation Section */}
+            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl mb-12 max-w-4xl mx-auto">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <Headphones className="w-8 h-8 text-purple-600" />
+                <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Master Your Pronunciation
+                </h3>
+              </div>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Use AI-powered analysis to improve your accent and pronunciation. 
+                Get real-time feedback and track your progress with advanced speech recognition.
+              </p>
+            </div>
             
-            <div className="flex justify-center gap-6">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
               <Button
                 size="lg"
                 onClick={() => setShowAuth('login')}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold shadow-xl transform hover:scale-105 transition-all duration-200"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-xl transform hover:scale-105 transition-all duration-200"
               >
                 Get Started
               </Button>
@@ -115,7 +129,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
                 size="lg"
                 variant="outline"
                 onClick={() => setShowAuth('signup')}
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-200"
+                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold transform hover:scale-105 transition-all duration-200"
               >
                 Create Account
               </Button>
@@ -125,44 +139,44 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
       </div>
 
       {/* Features Section */}
-      <div className="py-24 bg-white">
+      <div className="py-12 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h3 className="text-3xl font-bold text-gray-800 mb-4">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
               Why Choose QwiXAccent?
             </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
               Advanced AI technology meets intuitive design for the ultimate pronunciation learning experience.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg hover:shadow-xl transition-shadow duration-200">
-              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                <Mic className="w-8 h-8 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 shadow-lg hover:shadow-xl transition-shadow duration-200">
+              <div className="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                <Mic className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-gray-800 mb-4">Real-Time Analysis</h4>
-              <p className="text-gray-600">
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">Real-Time Analysis</h4>
+              <p className="text-sm sm:text-base text-gray-600">
                 Get instant feedback on your pronunciation with advanced AI speech recognition technology.
               </p>
             </div>
             
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg hover:shadow-xl transition-shadow duration-200">
-              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
-                <TrendingUp className="w-8 h-8 text-white" />
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg hover:shadow-xl transition-shadow duration-200">
+              <div className="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-6 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center">
+                <TrendingUp className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-gray-800 mb-4">Progress Tracking</h4>
-              <p className="text-gray-600">
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">Progress Tracking</h4>
+              <p className="text-sm sm:text-base text-gray-600">
                 Monitor your improvement with detailed analytics and personalized feedback reports.
               </p>
             </div>
             
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 shadow-lg hover:shadow-xl transition-shadow duration-200">
-              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                <Globe className="w-8 h-8 text-white" />
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 shadow-lg hover:shadow-xl transition-shadow duration-200">
+              <div className="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                <Globe className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
               </div>
-              <h4 className="text-xl font-bold text-gray-800 mb-4">American English Focus</h4>
-              <p className="text-gray-600">
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">American English Focus</h4>
+              <p className="text-sm sm:text-base text-gray-600">
                 Specifically designed to help you master the American English accent and pronunciation patterns.
               </p>
             </div>
@@ -173,7 +187,7 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
       {/* Authentication Modal */}
       {showAuth && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative">
+          <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <Button
               variant="ghost"
               size="sm"
@@ -183,14 +197,14 @@ const LandingPage = ({ onLogin }: LandingPageProps) => {
               <X className="w-4 h-4" />
             </Button>
             
-            <div className="text-center mb-8">
+            <div className="text-center mb-6 sm:mb-8">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <Zap className="w-8 h-8 text-blue-600" />
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <Zap className="w-6 sm:w-8 h-6 sm:h-8 text-blue-600" />
+                <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   QwiXAccent
                 </h2>
               </div>
-              <p className="text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600">
                 {showAuth === 'login' ? 'Welcome back!' : 
                  showAuth === 'signup' ? 'Join thousands improving their accent' : 
                  'Recover your account'}
