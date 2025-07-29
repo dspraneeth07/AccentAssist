@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Mic, Square, Play, Loader2, VolumeX, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,7 +37,6 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
   }, [isRecording, isAnalyzing, audioUrl, onRecordingUpdate]);
 
   useEffect(() => {
-    // Check microphone permissions on mount
     checkMicrophonePermissions();
     return () => cleanup();
   }, []);
@@ -106,14 +104,12 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
       
       streamRef.current = stream;
       
-      // Setup audio context for waveform
       audioContextRef.current = new AudioContext();
       const source = audioContextRef.current.createMediaStreamSource(stream);
       analyserRef.current = audioContextRef.current.createAnalyser();
       analyserRef.current.fftSize = 256;
       source.connect(analyserRef.current);
       
-      // Create MediaRecorder with better codec support
       const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') 
         ? 'audio/webm;codecs=opus' 
         : MediaRecorder.isTypeSupported('audio/mp4') 
@@ -143,7 +139,6 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
           const url = URL.createObjectURL(blob);
           setAudioUrl(url);
           
-          // Auto-analyze after recording stops
           setTimeout(() => analyzeAudio(blob), 500);
         } else {
           toast({
@@ -159,12 +154,10 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
       setIsRecording(true);
       setRecordingTime(0);
       
-      // Start timer
       timerRef.current = setInterval(() => {
         setRecordingTime(prev => prev + 1);
       }, 1000);
       
-      // Start waveform animation
       updateWaveform();
       
       toast({
@@ -244,7 +237,6 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
     setIsAnalyzing(true);
     
     try {
-      // Show analyzing toast
       toast({
         title: "Analyzing speech...",
         description: "Using Gemini AI to process your pronunciation"
@@ -253,7 +245,6 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
       const arrayBuffer = await audioToAnalyze.arrayBuffer();
       console.log('Audio buffer created:', arrayBuffer.byteLength, 'bytes');
       
-      // First transcribe
       const transcriptionResult = await transcribeAudio(arrayBuffer);
       console.log('Transcription result:', transcriptionResult);
       setTranscription(transcriptionResult);
@@ -262,7 +253,6 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
         throw new Error('No speech detected in the recording');
       }
       
-      // Then analyze pronunciation
       const analysisResult = await analyzePronounciation(transcriptionResult, arrayBuffer);
       console.log('Analysis result:', analysisResult);
       
@@ -343,52 +333,52 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
   return (
     <div className="text-center space-y-8">
       <div>
-        <h2 className="text-3xl font-bold text-foreground mb-3">
+        <h2 className="text-3xl font-bold text-foreground mb-3 font-poppins">
           Speak & Analyze Your Pronunciation
         </h2>
-        <p className="text-muted-foreground text-lg font-medium">
+        <p className="text-muted-foreground text-lg font-medium font-poppins">
           Press record, speak clearly, then stop to get instant feedback on your American English accent
         </p>
       </div>
       
-      {/* Recording Controls */}
+      {/* Recording Controls with bigger mic */}
       <div className="flex flex-col items-center space-y-6">
         <div className="flex items-center justify-center space-x-6">
-          {/* Start Recording Button */}
+          {/* Start Recording Button - Much Bigger */}
           {!isRecording && (
             <Button
               size="lg"
               onClick={startRecording}
               disabled={isAnalyzing || !canRecord}
-              className={`w-32 h-32 rounded-full text-white transition-all duration-300 transform hover:scale-105 shadow-2xl ${
+              className={`w-40 h-40 rounded-full text-white transition-all duration-300 transform hover:scale-105 shadow-2xl ${
                 !canRecord 
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-blue-500/50'
               }`}
             >
-              <div className="flex flex-col items-center space-y-2">
-                <Mic className="w-12 h-12" />
-                <span className="text-sm font-semibold">START</span>
+              <div className="flex flex-col items-center space-y-3">
+                <Mic className="w-16 h-16" />
+                <span className="text-lg font-bold font-poppins">START</span>
               </div>
             </Button>
           )}
           
-          {/* Stop Recording Button */}
+          {/* Stop Recording Button - Much Bigger */}
           {isRecording && (
             <Button
               size="lg"
               onClick={stopRecording}
-              className="w-32 h-32 rounded-full text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-500/50 animate-pulse"
+              className="w-40 h-40 rounded-full text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl shadow-red-500/50 animate-pulse"
             >
-              <div className="flex flex-col items-center space-y-2">
-                <Square className="w-12 h-12" />
-                <span className="text-sm font-semibold">STOP</span>
+              <div className="flex flex-col items-center space-y-3">
+                <Square className="w-16 h-16" />
+                <span className="text-lg font-bold font-poppins">STOP</span>
               </div>
             </Button>
           )}
         </div>
         
-        <div className="text-lg font-semibold text-muted-foreground">
+        <div className="text-lg font-semibold text-muted-foreground font-poppins">
           {isRecording 
             ? `🔴 Recording: ${formatTime(recordingTime)} - Click STOP when done`
             : isAnalyzing 
@@ -410,12 +400,12 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
       {/* Current Transcription */}
       {transcription && (
         <div className="space-y-4 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl">
-          <h3 className="text-xl font-bold text-foreground">What You Said</h3>
-          <p className="text-lg italic text-muted-foreground">"{transcription}"</p>
+          <h3 className="text-xl font-bold text-foreground font-poppins">What You Said</h3>
+          <p className="text-lg italic text-muted-foreground font-poppins">"{transcription}"</p>
           <Button
             onClick={() => playCorrection()}
             disabled={isPlayingCorrection}
-            className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700"
+            className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 font-poppins"
           >
             {isPlayingCorrection ? (
               <>
@@ -435,7 +425,7 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
       {/* Audio Playback */}
       {audioUrl && !isAnalyzing && (
         <div className="space-y-4 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl">
-          <h3 className="text-xl font-bold text-foreground">Your Recording</h3>
+          <h3 className="text-xl font-bold text-foreground font-poppins">Your Recording</h3>
           <audio controls className="mx-auto rounded-lg shadow-lg">
             <source src={audioUrl} type="audio/webm" />
             Your browser does not support audio playback.
@@ -444,7 +434,7 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
             <Button 
               onClick={() => analyzeAudio()}
               disabled={isAnalyzing}
-              className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700"
+              className="bg-gradient-to-r from-purple-500 to-blue-600 hover:from-purple-600 hover:to-blue-700 font-poppins"
             >
               {isAnalyzing ? (
                 <>
@@ -464,9 +454,9 @@ const VoiceRecorder = ({ onRecordingUpdate, onAnalysisComplete }: VoiceRecorderP
         <div className="space-y-4 p-6 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-2xl">
           <div className="flex items-center justify-center space-x-2">
             <Loader2 className="w-6 h-6 animate-spin text-orange-600" />
-            <h3 className="text-xl font-bold text-foreground">Processing with Gemini AI</h3>
+            <h3 className="text-xl font-bold text-foreground font-poppins">Processing with Gemini AI</h3>
           </div>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground font-poppins">
             Transcribing speech and analyzing your American English pronunciation...
           </p>
         </div>

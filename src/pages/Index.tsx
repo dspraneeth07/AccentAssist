@@ -5,7 +5,7 @@ import FeedbackDisplay from "@/components/FeedbackDisplay";
 import LearningSection from "@/components/LearningSection";
 import PronunciationChart from "@/components/PronunciationChart";
 import { Button } from "@/components/ui/button";
-import { LogOut, User } from "lucide-react";
+import { LogOut, User, Zap } from "lucide-react";
 
 interface IndexProps {
   user: any;
@@ -29,13 +29,19 @@ const Index = ({ user, onLogout }: IndexProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-poppins">
       {/* Header with user info and logout */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-gray-900">QwiXAccent</h1>
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <Zap className="w-8 h-8 text-blue-600" />
+                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+                </div>
+                <h1 className="text-2xl font-bold text-gray-900">QwiXAccent</h1>
+              </div>
               <span className="text-sm text-gray-500">AI Pronunciation Analyzer</span>
             </div>
             <div className="flex items-center gap-4">
@@ -58,7 +64,7 @@ const Index = ({ user, onLogout }: IndexProps) => {
       </header>
 
       {/* Main content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">
             Master Your Pronunciation

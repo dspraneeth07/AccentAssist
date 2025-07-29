@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -7,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { credentialsStore } from '@/data/credentials';
-import { Mic, Brain, BarChart3, Volume2, Sparkles, Zap } from 'lucide-react';
+import { Mic, Brain, BarChart3, Volume2, Zap } from 'lucide-react';
 
 interface LandingPageProps {
   onLogin: (user: any) => void;
@@ -19,13 +18,11 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
   const [showRecovery, setShowRecovery] = useState(false);
   const [recoveredCredentials, setRecoveredCredentials] = useState<{username: string; password: string} | null>(null);
 
-  // Login form state
   const [loginData, setLoginData] = useState({
     username: '',
     password: ''
   });
 
-  // Signup form state
   const [signupData, setSignupData] = useState({
     name: '',
     email: '',
@@ -34,7 +31,6 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
     phone: ''
   });
 
-  // Recovery form state
   const [recoveryData, setRecoveryData] = useState({
     username: '',
     phone: ''
@@ -80,7 +76,6 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
         title: "Account Created",
         description: "Your account has been created successfully!",
       });
-      // Reset form
       setSignupData({
         name: '',
         email: '',
@@ -125,30 +120,26 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-poppins flex">
       {/* Left Side - Logo & Features */}
-      <div className="flex-1 flex flex-col items-center justify-center p-8 relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-32 h-32 bg-blue-200/30 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-32 right-16 w-24 h-24 bg-indigo-200/30 rounded-full animate-bounce" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-10 w-16 h-16 bg-purple-200/30 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/3 right-1/3 w-20 h-20 bg-blue-300/20 rounded-full animate-bounce" style={{ animationDelay: '3s' }}></div>
-        </div>
-
-        <div className="relative z-10 text-center max-w-lg">
-          {/* Logo with 3D effect */}
-          <div className="mb-12 relative">
-            <div className="text-7xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent transform hover:scale-105 transition-transform duration-300 drop-shadow-lg">
-              QwiX
+      <div className="flex-1 flex flex-col items-center justify-center p-8">
+        <div className="text-center max-w-lg">
+          {/* Logo with Power/Lightning Icon */}
+          <div className="mb-8 relative">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="relative">
+                <Zap className="w-16 h-16 text-blue-600" />
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+              </div>
             </div>
-            <div className="text-3xl font-semibold text-gray-700 -mt-3 tracking-wide">
-              Accent
+            <div className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              QwiXAccent
             </div>
-            <div className="absolute -top-3 -right-3 w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-ping"></div>
-            <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full animate-pulse"></div>
+            <div className="text-lg text-gray-600 mt-2 font-medium">
+              AI Pronunciation Analyzer
+            </div>
           </div>
 
           {/* Tagline */}
-          <div className="mb-10">
+          <div className="mb-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">
               Master Your Pronunciation
             </h2>
@@ -157,49 +148,29 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
             </p>
           </div>
 
-          {/* Features */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl hover:bg-white/80 transition-all duration-300 transform hover:scale-105 shadow-lg">
-              <div className="relative">
-                <Mic className="w-10 h-10 text-blue-600 animate-pulse" />
-                <Sparkles className="w-4 h-4 text-yellow-500 absolute -top-1 -right-1 animate-bounce" />
-              </div>
+          {/* Clean Feature List */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-4 p-4 bg-white/70 rounded-xl shadow-lg">
+              <Mic className="w-8 h-8 text-blue-600" />
               <div className="text-left">
-                <h3 className="font-semibold text-gray-800 text-lg">Voice Analysis</h3>
-                <p className="text-sm text-gray-600">Real-time pronunciation feedback with AI</p>
+                <h3 className="font-semibold text-gray-800">Voice Analysis</h3>
+                <p className="text-sm text-gray-600">Real-time pronunciation feedback</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl hover:bg-white/80 transition-all duration-300 transform hover:scale-105 shadow-lg">
-              <div className="relative">
-                <Brain className="w-10 h-10 text-indigo-600 animate-bounce" />
-                <Zap className="w-4 h-4 text-yellow-500 absolute -top-1 -right-1 animate-ping" />
-              </div>
+            <div className="flex items-center gap-4 p-4 bg-white/70 rounded-xl shadow-lg">
+              <Brain className="w-8 h-8 text-indigo-600" />
               <div className="text-left">
-                <h3 className="font-semibold text-gray-800 text-lg">AI-Powered</h3>
+                <h3 className="font-semibold text-gray-800">AI-Powered</h3>
                 <p className="text-sm text-gray-600">Smart accent coaching technology</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl hover:bg-white/80 transition-all duration-300 transform hover:scale-105 shadow-lg">
-              <div className="relative">
-                <BarChart3 className="w-10 h-10 text-purple-600 animate-pulse" />
-                <div className="w-2 h-2 bg-green-500 rounded-full absolute -top-1 -right-1 animate-ping"></div>
-              </div>
+            <div className="flex items-center gap-4 p-4 bg-white/70 rounded-xl shadow-lg">
+              <BarChart3 className="w-8 h-8 text-purple-600" />
               <div className="text-left">
-                <h3 className="font-semibold text-gray-800 text-lg">Progress Tracking</h3>
-                <p className="text-sm text-gray-600">Monitor your improvement over time</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 p-4 bg-white/60 backdrop-blur-sm rounded-xl hover:bg-white/80 transition-all duration-300 transform hover:scale-105 shadow-lg">
-              <div className="relative">
-                <Volume2 className="w-10 h-10 text-blue-500 animate-pulse" />
-                <div className="w-2 h-2 bg-blue-500 rounded-full absolute -top-1 -right-1 animate-bounce"></div>
-              </div>
-              <div className="text-left">
-                <h3 className="font-semibold text-gray-800 text-lg">Audio Playback</h3>
-                <p className="text-sm text-gray-600">Hear correct pronunciation examples</p>
+                <h3 className="font-semibold text-gray-800">Progress Tracking</h3>
+                <p className="text-sm text-gray-600">Monitor your improvement</p>
               </div>
             </div>
           </div>
@@ -208,20 +179,19 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
 
       {/* Right Side - Auth Forms */}
       <div className="flex-1 flex items-center justify-center p-8">
-        <Card className="w-full max-w-md shadow-2xl border-0 bg-white/90 backdrop-blur-sm">
-          <CardHeader className="text-center pb-2">
-            <CardTitle className="text-3xl font-bold text-gray-800 mb-2">Welcome to QwiXAccent</CardTitle>
-            <p className="text-gray-600 text-lg">Master your pronunciation with AI</p>
+        <Card className="w-full max-w-md shadow-xl border-0 bg-white/95">
+          <CardHeader className="text-center pb-4">
+            <CardTitle className="text-2xl font-bold text-gray-800">Welcome</CardTitle>
           </CardHeader>
-          <CardContent className="pt-4">
+          <CardContent>
             {showRecovery ? (
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {recoveredCredentials ? (
-                  <div className="text-center space-y-6">
-                    <h3 className="font-semibold text-xl text-gray-800">Your Credentials</h3>
-                    <div className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
-                      <p className="text-gray-700 mb-2"><strong>Username:</strong> {recoveredCredentials.username}</p>
-                      <p className="text-gray-700"><strong>Password:</strong> {recoveredCredentials.password}</p>
+                  <div className="text-center space-y-4">
+                    <h3 className="font-semibold text-lg">Your Credentials</h3>
+                    <div className="p-4 bg-blue-50 rounded-lg">
+                      <p className="mb-2"><strong>Username:</strong> {recoveredCredentials.username}</p>
+                      <p><strong>Password:</strong> {recoveredCredentials.password}</p>
                     </div>
                     <Button 
                       onClick={() => {
@@ -229,49 +199,47 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
                         setRecoveredCredentials(null);
                         setRecoveryData({ username: '', phone: '' });
                       }}
-                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                      className="w-full bg-blue-600 hover:bg-blue-700"
                     >
                       Back to Login
                     </Button>
                   </div>
                 ) : (
-                  <form onSubmit={handleRecovery} className="space-y-6">
-                    <h3 className="font-semibold text-xl text-center text-gray-800">Recover Password</h3>
-                    <div className="space-y-2">
-                      <Label htmlFor="recovery-username" className="text-gray-700 font-medium">Username</Label>
+                  <form onSubmit={handleRecovery} className="space-y-4">
+                    <h3 className="font-semibold text-lg text-center">Recover Password</h3>
+                    <div>
+                      <Label htmlFor="recovery-username">Username</Label>
                       <Input
                         id="recovery-username"
                         type="text"
                         value={recoveryData.username}
                         onChange={(e) => setRecoveryData({...recoveryData, username: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="recovery-phone" className="text-gray-700 font-medium">Phone Number</Label>
+                    <div>
+                      <Label htmlFor="recovery-phone">Phone Number</Label>
                       <Input
                         id="recovery-phone"
                         type="tel"
                         value={recoveryData.phone}
                         onChange={(e) => setRecoveryData({...recoveryData, phone: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="flex gap-3">
+                    <div className="flex gap-2">
                       <Button 
                         type="button" 
                         variant="outline" 
                         onClick={() => setShowRecovery(false)}
-                        className="flex-1 py-3 rounded-lg border-gray-300 text-gray-700 hover:bg-gray-50"
+                        className="flex-1"
                       >
                         Back
                       </Button>
                       <Button 
                         type="submit" 
                         disabled={isLoading} 
-                        className="flex-1 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                        className="flex-1 bg-blue-600 hover:bg-blue-700"
                       >
                         {isLoading ? 'Searching...' : 'Recover'}
                       </Button>
@@ -281,39 +249,37 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
               </div>
             ) : (
               <Tabs defaultValue="login" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 bg-gray-100 p-1 rounded-lg">
-                  <TabsTrigger value="login" className="data-[state=active]:bg-white data-[state=active]:text-gray-800 rounded-md py-2 font-medium">Login</TabsTrigger>
-                  <TabsTrigger value="signup" className="data-[state=active]:bg-white data-[state=active]:text-gray-800 rounded-md py-2 font-medium">Sign Up</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-2">
+                  <TabsTrigger value="login">Login</TabsTrigger>
+                  <TabsTrigger value="signup">Sign Up</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="login" className="mt-6">
-                  <form onSubmit={handleLogin} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="login-username" className="text-gray-700 font-medium">Username</Label>
+                <TabsContent value="login" className="mt-4">
+                  <form onSubmit={handleLogin} className="space-y-4">
+                    <div>
+                      <Label htmlFor="login-username">Username</Label>
                       <Input
                         id="login-username"
                         type="text"
                         value={loginData.username}
                         onChange={(e) => setLoginData({...loginData, username: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="login-password" className="text-gray-700 font-medium">Password</Label>
+                    <div>
+                      <Label htmlFor="login-password">Password</Label>
                       <Input
                         id="login-password"
                         type="password"
                         value={loginData.password}
                         onChange={(e) => setLoginData({...loginData, password: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
                     <Button 
                       type="submit" 
                       disabled={isLoading} 
-                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                      className="w-full bg-blue-600 hover:bg-blue-700"
                     >
                       {isLoading ? 'Logging in...' : 'Login'}
                     </Button>
@@ -321,74 +287,69 @@ export const LandingPage = ({ onLogin }: LandingPageProps) => {
                       type="button" 
                       variant="link" 
                       onClick={() => setShowRecovery(true)}
-                      className="w-full text-blue-600 hover:text-blue-700 font-medium"
+                      className="w-full"
                     >
                       Forgot Password?
                     </Button>
                   </form>
                 </TabsContent>
 
-                <TabsContent value="signup" className="mt-6">
-                  <form onSubmit={handleSignup} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-name" className="text-gray-700 font-medium">Full Name</Label>
+                <TabsContent value="signup" className="mt-4">
+                  <form onSubmit={handleSignup} className="space-y-3">
+                    <div>
+                      <Label htmlFor="signup-name">Full Name</Label>
                       <Input
                         id="signup-name"
                         type="text"
                         value={signupData.name}
                         onChange={(e) => setSignupData({...signupData, name: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-email" className="text-gray-700 font-medium">Email</Label>
+                    <div>
+                      <Label htmlFor="signup-email">Email</Label>
                       <Input
                         id="signup-email"
                         type="email"
                         value={signupData.email}
                         onChange={(e) => setSignupData({...signupData, email: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-username" className="text-gray-700 font-medium">Username</Label>
+                    <div>
+                      <Label htmlFor="signup-username">Username</Label>
                       <Input
                         id="signup-username"
                         type="text"
                         value={signupData.username}
                         onChange={(e) => setSignupData({...signupData, username: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-password" className="text-gray-700 font-medium">Password</Label>
+                    <div>
+                      <Label htmlFor="signup-password">Password</Label>
                       <Input
                         id="signup-password"
                         type="password"
                         value={signupData.password}
                         onChange={(e) => setSignupData({...signupData, password: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="signup-phone" className="text-gray-700 font-medium">Phone Number</Label>
+                    <div>
+                      <Label htmlFor="signup-phone">Phone Number</Label>
                       <Input
                         id="signup-phone"
                         type="tel"
                         value={signupData.phone}
                         onChange={(e) => setSignupData({...signupData, phone: e.target.value})}
                         required
-                        className="py-3 px-4 rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                       />
                     </div>
                     <Button 
                       type="submit" 
                       disabled={isLoading} 
-                      className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold py-3 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200"
+                      className="w-full bg-blue-600 hover:bg-blue-700"
                     >
                       {isLoading ? 'Creating Account...' : 'Sign Up'}
                     </Button>
