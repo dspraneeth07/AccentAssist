@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import VoiceRecorder from "@/components/VoiceRecorder";
 import FeedbackDisplay from "@/components/FeedbackDisplay";
 import LearningSection from "@/components/LearningSection";
@@ -12,6 +13,21 @@ interface IndexProps {
 }
 
 const Index = ({ user, onLogout }: IndexProps) => {
+  const [analysisResult, setAnalysisResult] = useState<any>(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+
+  const handleRecordingUpdate = (recording: boolean, analyzing: boolean, url: string | null) => {
+    setIsRecording(recording);
+    setIsAnalyzing(analyzing);
+    setAudioUrl(url);
+  };
+
+  const handleAnalysisComplete = (result: any) => {
+    setAnalysisResult(result);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header with user info and logout */}
@@ -55,12 +71,15 @@ const Index = ({ user, onLogout }: IndexProps) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <div className="space-y-8">
-            <VoiceRecorder />
-            <FeedbackDisplay />
+            <VoiceRecorder 
+              onRecordingUpdate={handleRecordingUpdate}
+              onAnalysisComplete={handleAnalysisComplete}
+            />
+            <FeedbackDisplay analysisResult={analysisResult} />
           </div>
           
           <div className="space-y-8">
-            <PronunciationChart />
+            <PronunciationChart analysisResult={analysisResult} />
             <LearningSection />
           </div>
         </div>
