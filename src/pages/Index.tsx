@@ -2,8 +2,6 @@
 import { useState } from "react";
 import VoiceRecorder from "@/components/VoiceRecorder";
 import FeedbackDisplay from "@/components/FeedbackDisplay";
-import LearningSection from "@/components/LearningSection";
-import PronunciationChart from "@/components/PronunciationChart";
 import { Button } from "@/components/ui/button";
 import { LogOut, User, Zap } from "lucide-react";
 
@@ -30,30 +28,36 @@ const Index = ({ user, onLogout }: IndexProps) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 font-poppins">
-      {/* Header with user info and logout */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      {/* Attractive Header */}
+      <header className="bg-white shadow-lg border-b backdrop-blur-sm bg-white/95">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
-                <div className="relative">
-                  <Zap className="w-8 h-8 text-blue-600" />
-                  <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
-                </div>
-                <h1 className="text-2xl font-bold text-gray-900">QwiXAccent</h1>
-              </div>
-              <span className="text-sm text-gray-500">AI Pronunciation Analyzer</span>
-            </div>
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <User className="w-4 h-4" />
-                <span>Welcome, {user.name}</span>
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <Zap className="w-10 h-10 text-blue-600" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    QwiXAccent
+                  </h1>
+                  <p className="text-sm text-gray-600 font-medium">AI Pronunciation Analyzer</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 text-gray-700">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-white" />
+                </div>
+                <span className="font-semibold">Welcome, {user.name}</span>
               </div>
               <Button 
                 onClick={onLogout}
                 variant="outline" 
                 size="sm"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 hover:bg-red-50 hover:border-red-300 hover:text-red-600 transition-all duration-200"
               >
                 <LogOut className="w-4 h-4" />
                 Logout
@@ -63,30 +67,27 @@ const Index = ({ user, onLogout }: IndexProps) => {
         </div>
       </header>
 
-      {/* Main content */}
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+      {/* Main Centered Content */}
+      <div className="container mx-auto px-4 py-12 max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
             Master Your Pronunciation
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
             Use AI-powered analysis to improve your accent and pronunciation. 
-            Get real-time feedback and track your progress.
+            Get real-time feedback and track your progress with advanced speech recognition.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <div className="space-y-8">
-            <VoiceRecorder 
-              onRecordingUpdate={handleRecordingUpdate}
-              onAnalysisComplete={handleAnalysisComplete}
-            />
-            <FeedbackDisplay analysisResult={analysisResult} />
-          </div>
+        {/* Centered Main Content */}
+        <div className="max-w-3xl mx-auto space-y-12">
+          <VoiceRecorder 
+            onRecordingUpdate={handleRecordingUpdate}
+            onAnalysisComplete={handleAnalysisComplete}
+          />
           
-          <div className="space-y-8">
-            <PronunciationChart analysisResult={analysisResult} />
-            <LearningSection />
+          <div className="w-full">
+            <FeedbackDisplay analysisResult={analysisResult} />
           </div>
         </div>
       </div>

@@ -1,381 +1,185 @@
 
-# QwiXAccent - AI-Powered American English Pronunciation Analyzer
+# QwiXAccent - AI Pronunciation Analyzer
 
-## 🎯 Project Overview
+QwiXAccent is an advanced AI-powered pronunciation analysis tool designed to help users master American English pronunciation. Using cutting-edge speech recognition and AI analysis, it provides real-time feedback on pronunciation accuracy, helping users improve their accent and speaking confidence.
 
-**QwiXAccent** is a sophisticated web application that analyzes users' pronunciation accuracy and accent match against standard American English. Built with cutting-edge web technologies and AI APIs, it provides real-time feedback to help users improve their English pronunciation.
+## Features
 
-## 🚀 Live Demo
+- **Real-time Speech Analysis**: Advanced AI-powered pronunciation evaluation
+- **Interactive Voice Recording**: High-quality audio recording with waveform visualization
+- **Instant Feedback**: Detailed analysis of vowels, consonants, stress, rhythm, and intonation
+- **User Authentication**: Secure login and signup system with persistent storage
+- **Progress Tracking**: Monitor improvement over time with detailed analytics
+- **Responsive Design**: Beautiful, modern UI that works on all devices
 
-**URL**: https://qwixaccent.netlify.app
+## Technology Stack
 
+- **Frontend**: React 18 with TypeScript
+- **Build Tool**: Vite for fast development and building
+- **Styling**: Tailwind CSS with custom design system
+- **UI Components**: Radix UI with shadcn/ui component library
+- **State Management**: React hooks for local state management
+- **Audio Processing**: Web Audio API for real-time audio analysis
+- **Speech Recognition**: Google Gemini AI integration for transcription and analysis
+- **Charts**: Recharts for data visualization
+- **Icons**: Lucide React icon library
+- **Fonts**: Poppins font family for modern typography
 
-## 🛠️ Tech Stack
-
-### Frontend Framework & Core Technologies
-- **React 18.3.1** - Modern UI library with hooks and functional components
-- **TypeScript** - Type-safe JavaScript for better development experience
-- **Vite** - Fast build tool and development server
-- **Tailwind CSS** - Utility-first CSS framework for responsive design
-- **shadcn/ui** - High-quality, accessible UI components
-
-### Audio Processing & Media APIs
-- **MediaRecorder API** - Native browser API for audio recording
-- **Web Audio API** - Real-time audio analysis and waveform visualization
-- **AudioContext & AnalyserNode** - Frequency analysis for visual feedback
-
-### AI & Speech Processing APIs
-- **Google Gemini 1.5 Flash API** - Advanced speech-to-text transcription
-- **Gemini AI Analysis** - Real-time pronunciation accuracy and phoneme analysis
-- **Web Speech API** - Native browser text-to-speech with male American English voices
-- **IPA Phonetic Analysis** - International Phonetic Alphabet transcription
-
-### State Management & Data Flow
-- **React Hooks** - useState, useRef, useEffect for component state
-- **@tanstack/react-query** - Server state management and caching
-- **Custom Hooks** - Reusable logic for toast notifications
-
-### UI/UX Libraries
-- **Lucide React** - Beautiful, customizable icons
-- **Recharts** - Interactive charts for pronunciation analysis
-- **Radix UI** - Accessible, unstyled UI primitives
-- **Class Variance Authority** - Type-safe CSS class management
-
-## 🏗️ Project Architecture
+## Architecture
 
 ### File Structure
 ```
 src/
-├── pages/
-│   └── Index.tsx                 # Main application page
 ├── components/
-│   ├── VoiceRecorder.tsx         # Core recording component with start/stop
-│   ├── WaveformDisplay.tsx       # Real-time audio visualization
-│   ├── FeedbackDisplay.tsx       # Pronunciation analysis results
-│   ├── PronunciationChart.tsx    # Visual pronunciation breakdown
-│   └── ui/                       # shadcn/ui component library
+│   ├── ui/                    # Reusable UI components (shadcn/ui)
+│   ├── VoiceRecorder.tsx      # Main recording interface
+│   ├── FeedbackDisplay.tsx    # Analysis results display
+│   ├── LearningSection.tsx    # Educational content
+│   ├── PronunciationChart.tsx # Data visualization
+│   ├── WaveformDisplay.tsx    # Audio waveform visualization
+│   └── LandingPage.tsx        # Authentication and landing
+├── pages/
+│   ├── Index.tsx              # Main application page
+│   └── NotFound.tsx           # 404 error page
 ├── utils/
-│   ├── geminiApi.ts             # Gemini AI API integration
-│   ├── speechAnalysis.ts        # Speech processing orchestration
-│   └── textToSpeech.ts          # Male American English TTS
-└── hooks/
-    └── use-toast.ts             # Toast notification system
+│   ├── speechAnalysis.ts      # AI speech processing logic
+│   ├── textToSpeech.ts        # Audio playback utilities
+│   └── geminiApi.ts           # Google Gemini AI integration
+├── data/
+│   └── credentials.ts         # User authentication system
+├── hooks/
+│   └── use-toast.ts           # Toast notification system
+└── lib/
+    └── utils.ts               # Utility functions
 ```
 
-### Component Architecture
+### System Architecture
 
-#### VoiceRecorder Component
-- **State Management**: Recording state (idle/recording/processing/complete)
-- **Audio Capture**: MediaRecorder API with WebM format
-- **UI States**: Dynamic button states (START → STOP → Processing)
-- **Error Handling**: Microphone permissions and recording failures
-
-#### FeedbackDisplay Component
-- **Analysis Rendering**: Real-time pronunciation scores
-- **Word-by-Word Analysis**: Color-coded pronunciation feedback
-- **Audio Playback**: Original recording and corrected pronunciation
-- **Progress Visualization**: Circular progress bars and charts
-
-#### WaveformDisplay Component
-- **Real-time Visualization**: Audio frequency analysis
-- **Web Audio API**: AudioContext for live audio processing
-- **Visual Feedback**: Animated waveform during recording
-
-### Data Flow Architecture
-
-```mermaid
-graph TD
-    A[User Click Record] --> B[MediaRecorder Start]
-    B --> C[Real-time Waveform]
-    C --> D[User Click Stop]
-    D --> E[Audio Blob Created]
-    E --> F[Gemini API Transcription]
-    F --> G[Gemini AI Analysis]
-    G --> H[Real-time Accuracy Score]
-    H --> I[Male American TTS Playback]
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   User Input    │    │   Web Browser   │    │  QwiXAccent App │
+│                 │    │                 │    │                 │
+│ • Microphone    │───▶│ • Web Audio API │───▶│ • React Frontend│
+│ • Voice         │    │ • MediaRecorder │    │ • State Mgmt    │
+│ • Interactions  │    │ • AudioContext  │    │ • UI Components │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                                                       │
+                                                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  Data Storage   │    │   AI Analysis   │    │ Audio Processing│
+│                 │◀───│                 │◀───│                 │
+│ • Local Storage │    │ • Gemini AI     │    │ • Speech-to-Text│
+│ • User Profiles │    │ • Transcription │    │ • Pronunciation │
+│ • Credentials   │    │ • Feedback Gen. │    │ • Waveform Data │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-## 🔧 Technical Implementation
+## Development Journey
 
-### Audio Recording System
-```typescript
-// Real-time audio recording with WebM format
-const mediaRecorder = new MediaRecorder(stream, {
-  mimeType: 'audio/webm;codecs=opus',
-  audioBitsPerSecond: 128000
-});
+### Phase 1: Foundation (Initial Setup)
+- Set up React + TypeScript + Vite development environment
+- Implemented Tailwind CSS for styling with custom design system
+- Created basic component structure and routing
 
-// Chunked data collection for smooth recording
-mediaRecorder.ondataavailable = (event) => {
-  if (event.data.size > 0) {
-    audioChunks.push(event.data);
-  }
-};
-```
+### Phase 2: Authentication System
+- Developed secure user authentication with signup/login
+- Implemented persistent local storage for user credentials
+- Created attractive landing page with modern UI design
+- Added form validation and error handling
 
-### Gemini AI Integration
-```typescript
-// Real-time pronunciation analysis
-const analyzeWithGemini = async (transcription: string, audioBlob: Blob) => {
-  const response = await fetch(GEMINI_API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{
-        parts: [
-          { text: pronunciationAnalysisPrompt },
-          { inline_data: { mime_type: 'audio/webm', data: base64Audio } }
-        ]
-      }],
-      generationConfig: {
-        temperature: 0.2,    // Low temperature for consistent analysis
-        maxOutputTokens: 3000,
-        topP: 0.9,
-        topK: 20
-      }
-    })
-  });
-  
-  // Real-time accuracy calculation based on actual audio analysis
-  return {
-    accuracy: realTimeAccuracy,      // 0.0-1.0 based on actual pronunciation
-    modulation: realTimeModulation,  // 1.0-5.0 prosody score
-    wordAnalysis: detailedWordAnalysis,
-    overallFeedback: aiGeneratedFeedback
-  };
-};
-```
+### Phase 3: Audio Recording System
+- Integrated Web Audio API for microphone access
+- Built real-time audio recording with waveform visualization
+- Implemented audio blob generation and playback functionality
+- Added recording timer and visual feedback
 
-### Male American English TTS System
-```typescript
-// Prioritized male voice selection
-const selectMaleAmericanVoice = () => {
-  const voices = speechSynthesis.getVoices();
-  const preferredMaleVoices = [
-    'Microsoft David Desktop', 'Microsoft David',
-    'Google US English Male', 'US English Male',
-    'Alex', 'Daniel', 'Fred'
-  ];
-  
-  // Voice configuration for authentic American male accent
-  utterance.lang = 'en-US';
-  utterance.rate = 1.0;      // Original speed
-  utterance.pitch = 0.9;     // Male pitch range
-  utterance.volume = 1.0;    // Full volume
-};
-```
+### Phase 4: AI Integration
+- Connected Google Gemini AI for speech analysis
+- Implemented speech-to-text transcription
+- Built pronunciation analysis and feedback system
+- Added text-to-speech for correct pronunciation playback
 
-## 📊 Real-Time Analysis Features
+### Phase 5: UI/UX Enhancement
+- Designed responsive, mobile-friendly interface
+- Implemented gradient backgrounds and modern styling
+- Added interactive charts for pronunciation breakdown
+- Created toast notifications for user feedback
 
-### Pronunciation Accuracy Scoring
-- **Vowel Sound Analysis**: /æ/, /ɑ/, /ɪ/, /i/, /ʊ/, /u/, /ə/, /ɛ/, /ɔ/ detection
-- **Consonant Evaluation**: R, L, TH, W, V sound accuracy
-- **Stress Pattern Recognition**: Syllable emphasis analysis
-- **Rhythm Assessment**: Timing and flow evaluation
+### Phase 6: Polish & Optimization
+- Optimized audio processing for better performance
+- Enhanced error handling and user experience
+- Added comprehensive logging and debugging
+- Implemented clean, maintainable code structure
 
-### Word-by-Word Feedback
-```typescript
-interface WordAnalysis {
-  word: string;
-  isCorrect: boolean;
-  userPhonemes: string;        // IPA transcription of user's pronunciation
-  nativePhonemes: string;      // Correct American English IPA
-  feedback: string;            // Specific improvement suggestions
-}
-```
+## Brand Identity
 
-### Modulation Scoring System
-- **1.0-2.0**: Monotone, needs significant improvement
-- **2.1-3.0**: Basic rhythm, some variation
-- **3.1-4.0**: Good prosody, natural flow
-- **4.1-5.0**: Excellent American English rhythm
+- **Logo**: ⚡ (Zap icon) - Represents the power and speed of AI-driven learning
+- **Color Scheme**: Blue to Purple gradient - Modern, tech-forward, trustworthy
+- **Typography**: Poppins - Clean, friendly, and highly readable
+- **Design Philosophy**: Minimalist, user-centric, and accessibility-focused
 
-## 🔍 AI Processing Pipeline
+## Getting Started
 
-### Stage 1: Audio Transcription
-```typescript
-// Enhanced transcription with name recognition
-const transcriptionPrompt = `
-Transcribe this audio with high accuracy. 
-Special attention to:
-- Proper nouns and names (especially Indian names like 'Dhadi')
-- Pronunciation variations in Indian-accented English
-- Return ONLY the exact transcribed text
-`;
-```
+1. **Clone the repository**
+   ```bash
+   git clone [repository-url]
+   cd qwixaccent
+   ```
 
-### Stage 2: Pronunciation Analysis
-```typescript
-// Real-time accuracy calculation
-const analysisPrompt = `
-Analyze pronunciation accuracy compared to American English:
-1. Vowel sound accuracy
-2. Consonant clarity
-3. Word stress patterns
-4. Syllable timing
-5. Intonation patterns
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Return JSON with real accuracy scores, not mock data.
-`;
-```
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
 
-### Stage 3: Feedback Generation
-- **Color-coded visualization**: Green (correct) vs Red (needs improvement)
-- **IPA phonetic comparison**: User pronunciation vs native pronunciation
-- **Specific improvement suggestions**: Targeted feedback for each word
+4. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-## 🎨 UI/UX Design System
+## Deployment
 
-### Component States
-```typescript
-// Recording button states
-const buttonStates = {
-  idle: { text: 'START', color: 'blue', icon: 'Mic' },
-  recording: { text: 'STOP', color: 'red', icon: 'Square', pulsing: true },
-  processing: { text: 'Processing...', color: 'gray', disabled: true },
-  complete: { text: 'Record Again', color: 'green', icon: 'RotateCcw' }
-};
-```
+The application is configured for deployment on Netlify:
 
-### Responsive Design
-- **Mobile-first approach**: Optimized for touch interactions
-- **Gradient backgrounds**: Modern glass-morphism design
-- **Accessibility**: WCAG 2.1 AA compliance
-- **Toast notifications**: Real-time user feedback
+1. Connect your repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `dist`
+4. Deploy automatically on push to main branch
 
-## 🔒 Security & Privacy
+The `netlify.toml` file is configured for single-page application routing.
 
-### API Security
-- **Environment variables**: Secure API key management
-- **Request validation**: Input sanitization and validation
-- **Rate limiting**: Built-in quota management
-- **Error handling**: Graceful degradation on failures
+## Environment Setup
 
-### Audio Privacy
-- **Client-side processing**: No audio storage on servers
-- **Temporary blobs**: Auto-cleanup after analysis
-- **User consent**: Explicit microphone permissions
+No environment variables required for basic functionality. The application uses:
+- Local storage for user authentication
+- Google Gemini AI (requires API key for production use)
+- Web Audio API (browser-native)
 
-## 📈 Performance Optimizations
+## Browser Support
 
-### Audio Processing
-- **Chunked recording**: 100ms intervals for smooth capture
-- **Efficient blob handling**: Memory-conscious audio processing
-- **Web Workers ready**: Prepared for background processing
+- Chrome 80+ (recommended for best audio support)
+- Firefox 75+
+- Safari 14+
+- Edge 80+
 
-### API Efficiency
-- **Optimized requests**: Minimal payload sizes
-- **Error recovery**: Exponential backoff on failures
-- **Caching strategy**: React Query for response caching
+**Note**: Microphone access requires HTTPS in production environments.
 
-### UI Performance
-- **React.memo**: Optimized component re-renders
-- **useCallback**: Stable function references
-- **Lazy loading**: Code splitting for faster initial load
+## Contributing
 
-## 🛠️ Development Setup
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-### Prerequisites
-```bash
-Node.js 18+
-npm or bun package manager
-Modern browser with MediaRecorder support
-```
+## License
 
-### Installation
-```bash
-# Clone repository
-git clone <repository-url>
-cd qwixaccent
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-echo "VITE_GEMINI_API_KEY=your_gemini_api_key" > .env
-
-# Start development server
-npm run dev
-```
-
-### Build & Deploy
-```bash
-# Production build
-npm run build
-
-# Preview build locally
-npm run preview
-
-# Deploy to Lovable
-# Use the Publish button in Lovable interface
-```
-
-## 🔧 Configuration
-
-### Gemini API Setup
-1. Visit [Google AI Studio](https://makersuite.google.com/)
-2. Create new project and generate API key
-3. Add key to environment: `VITE_GEMINI_API_KEY=your_key`
-4. Configure usage quotas and billing
-
-### Browser Compatibility
-- **Chrome 85+** (Recommended)
-- **Firefox 80+**
-- **Safari 14+**
-- **Edge 85+**
-
-## 📊 Technical Specifications
-
-### Audio Format Support
-- **Input**: WebM with Opus codec
-- **Sample Rate**: 48kHz (browser dependent)
-- **Bit Rate**: 128kbps
-- **Channels**: Mono (optimized for speech)
-
-### AI Model Configuration
-- **Model**: Gemini 1.5 Flash
-- **Temperature**: 0.2 (consistent analysis)
-- **Max Tokens**: 3000 (detailed feedback)
-- **Top P**: 0.9 (balanced creativity)
-
-### Performance Metrics
-- **Recording Latency**: <100ms
-- **Analysis Time**: 2-5 seconds
-- **Accuracy Range**: 30%-95% (realistic scoring)
-- **Modulation Range**: 1.5-5.0 (prosody assessment)
-
-## 🚀 Future Enhancements
-
-### Planned Features
-1. **Offline Mode**: WebAssembly for local processing
-2. **Progress Tracking**: User accounts with improvement history
-3. **Lesson System**: Structured pronunciation courses
-4. **Multi-accent Support**: British, Australian, Canadian English
-5. **Advanced Analytics**: Detailed pronunciation heatmaps
-
-### Technical Roadmap
-- **WebAssembly Integration**: Faster local processing
-- **Service Worker**: Offline functionality
-- **WebRTC**: Real-time peer-to-peer practice
-- **Machine Learning**: Custom pronunciation models
-
-## 🤝 Contributing
-
-### Development Guidelines
-1. Follow TypeScript strict mode
-2. Use Tailwind CSS semantic tokens
-3. Implement proper error handling
-4. Add comprehensive logging for debugging
-5. Test across multiple browsers and devices
-
-### Code Quality
-- **ESLint + Prettier**: Automated code formatting
-- **Conventional Commits**: Standardized commit messages
-- **Component Testing**: Unit tests for critical components
-- **Performance Monitoring**: Regular performance audits
+This project is developed for educational and demonstration purposes.
 
 ---
 
-**Built with ❤️ using React, TypeScript, Tailwind CSS, and Google Gemini AI**
-
-*QwiXAccent helps users achieve authentic American English pronunciation through real-time AI analysis and feedback.*
+**QwiXAccent** - Empowering clear communication through AI-powered pronunciation analysis.
