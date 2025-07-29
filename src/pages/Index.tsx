@@ -41,7 +41,7 @@ const Index = ({ user, onLogout }: IndexProps) => {
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  QwiXAccent
+                  AccentAssist
                 </h1>
                 <p className="text-xs sm:text-sm text-gray-600 font-medium">AI Pronunciation Analyzer</p>
               </div>
