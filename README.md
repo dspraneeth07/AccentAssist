@@ -1,7 +1,7 @@
 
-# ⚡ QwiXAccent - AI Pronunciation Analyzer
+# ⚡ AccentAssist - AI Pronunciation Analyzer
 
-QwiXAccent is an advanced AI-powered pronunciation analysis tool designed to help users master American English pronunciation. Using cutting-edge speech recognition and AI analysis, it provides real-time feedback on pronunciation accuracy, helping users improve their accent and speaking confidence.
+AccentAssist is an advanced AI-powered pronunciation analysis tool designed to help users master American English pronunciation. Using cutting-edge speech recognition and AI analysis, it provides real-time feedback on pronunciation accuracy, helping users improve their accent and speaking confidence.
 
 ## 🚀 Features
 
@@ -34,7 +34,7 @@ QwiXAccent is an advanced AI-powered pronunciation analysis tool designed to hel
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   User Input    │    │   Web Browser   │    │  QwiXAccent App │
+│   User Input    │    │   Web Browser   │    │  AccentAssist App │
 │                 │    │                 │    │                 │
 │ • Microphone    │───▶│ • Web Audio API │───▶│ • React Frontend│
 │ • Voice         │    │ • MediaRecorder │    │ • State Mgmt    │
@@ -79,7 +79,7 @@ src/
 ## 🎨 Brand Identity
 
 - **Logo**: ⚡ (Zap icon) - Represents the power and speed of AI-driven learning
-- **Favicon**: ⚡ (Lightning/Power icon) - QwiXAccent brand identifier  
+- **Favicon**: ⚡ (Lightning/Power icon) - AccentAssist brand identifier  
 - **Color Scheme**: Blue to Purple gradient - Modern, tech-forward, trustworthy
 - **Typography**: Poppins - Clean, friendly, and highly readable
 - **Design Philosophy**: Minimalist, user-centric, mobile-first, and accessibility-focused
@@ -141,7 +141,7 @@ src/
 1. **Clone the repository**
    ```bash
    git clone [repository-url]
-   cd qwixaccent
+   cd AccentAssist
    ```
 
 2. **Install dependencies**
@@ -180,7 +180,7 @@ No environment variables required for basic functionality. The application uses:
 
 ## 📊 User Data Management
 
-QwiXAccent includes a comprehensive user management system:
+AccentAssist includes a comprehensive user management system:
 - **CSV Export**: Export all user credentials in Name, Email, Username, Password, Phone format
 - **Secure Storage**: All user data stored persistently in local code files
 - **Database View**: Table-style interface for viewing all registered users
@@ -219,6 +219,6 @@ This project is developed for educational and demonstration purposes, showcasing
 
 ---
 
-**⚡ QwiXAccent** - Empowering clear communication through AI-powered pronunciation analysis with beautiful, responsive design.
+**⚡ AccentAssist** - Empowering clear communication through AI-powered pronunciation analysis with beautiful, responsive design.
 
 *Built with ❤️ using modern web technologies*
